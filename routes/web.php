@@ -2,6 +2,40 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PhotoController;
+
+Route::resource('photos', PhotoController::class)->only([
+    'index', 'show'
+]);
+
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);
+
+Route::resource('photos', PhotoController::class);
+
+// untuk halaman utama
+Route::get('/', HomeController::class);
+
+// untuk halaman about
+Route::get('/about', AboutController::class);
+
+// untuk halaman artikel berdasarkan ID
+Route::get('/articles/{id}', ArticleController::class);
+
+// untuk halaman utama
+Route::get('/', [PageController::class, 'index']);
+
+// untuk halaman about
+Route::get('/about', [PageController::class, 'about']);
+
+// untuk halaman artikel dengan parameter ID
+Route::get('/articles/{id}', [PageController::class, 'articles']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,9 +43,7 @@ Route::get('/', function () {
 Route::resource('items', ItemController::class);
 
 // route basic
-Route::get('/hello', function () {
-    return 'Hello World';
-});
+Route::get('/hello', [WelcomeController::class, 'hello']);
 
 Route::get('/world', function () {
     return 'world';
