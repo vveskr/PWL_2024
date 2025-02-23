@@ -78,5 +78,5 @@ Route::get('/user/{name?}', function ($name = 'John') {
 
 //view
 Route::get('/greeting', function () {
-    return view('hello', ['name' => 'Lovelyta Sekarayu']);
+    return view('blog.hello', ['name' => 'Lovelyta Sekarayu']);
 });
